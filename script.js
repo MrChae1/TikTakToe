@@ -10,6 +10,26 @@ function gameBoard(){
     }
   }
 
+  const showWin = (win, wins, showM) => {
+    // const winner = document.querySelector('#Show-Winner');
+    // const showModal = document.querySelector('.hidden-modal');
+    wins.textContent = `Winner is player ${win}`;
+    showM.style.display = 'block';  
+  }
+
+  // const reStart = (reBtn, showM, win, btnArr, fX, fO) => {
+  //   const reGame = gameStart();
+  //   reBtn.addEventListener('click', () => {
+  //     btnArr.forEach(arr => arr.disabled = false);
+  //     btnArr.forEach(arr => arr.textContent = '');
+  //     fX = [];
+  //     fO = [];
+  //     showM.style.display = 'none';
+  //     win.textContent = '';
+      
+  //   });
+  // }
+
   const validate = (result, turn) => {
     if (result.textContent === ""){
       result.textContent  = turn;
@@ -33,23 +53,58 @@ function gameBoard(){
     }
 
     if(ForX.length >= 3){
-      validateResult(ForX, ForO, decider);
+      validateResult(ForX, ForO, decider, arrcheck, arrchecking);
     }
   
 }
 
-  return { markTurn, checkBoard }
+  return { markTurn, checkBoard, showWin, reStart }
 
 }
- function validateResult(x, o, win){
+ function validateResult(x, o, win, AllArray, arrcheck){
+  const winner = document.querySelector('#Show-Winner');
+  const showModal = document.querySelector('.hidden-modal');
+  const reStartBtn = document.querySelector('#Restart');
+  const GBoard = gameBoard();
   const horOne = ["1", "2", "3"];
+  const horTwo = ["4", "5", "6"];
+  const horThree = ["7", "8", "9"];
+  const verOne = ["1", "4", "7"];
+  const verTwo = ["2", "5", "8"];
+  const verThree = ["3", "6", "9"];
+  const horver = ["1", "5", "9"];
+  const horverTwo = ["3", "5", "7"];
 
-  if(horOne.every(value => x.includes(value)) || horOne.every(value => o.includes(value)) ){
-    console.log(`Player ${win}`);
+  if((horOne.every(value => x.includes(value)) || horOne.every(value => o.includes(value))) || (verOne.every(value => x.includes(value)) || verOne.every(value => o.includes(value)))){  
+    GBoard.showWin(win, winner, showModal);
+    // winner.textContent = `Winner is player ${win}`;
+    // showModal.style.display = 'block';
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
+
+  }
+  else if((horTwo.every(value => x.includes(value)) || horTwo.every(value => o.includes(value))) || (verTwo.every(value => x.includes(value)) || verTwo.every(value => o.includes(value)))){
+    GBoard.showWin(win);
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
+
+  }
+  else if((horThree.every(value => x.includes(value))) || (horThree.every(value => o.includes(value))) || (verThree.every(value => x.includes(value))) || (verThree.every(value => o.includes(value)))){
+    GBoard.showWin(win);
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
+  }
+  else if((horver.every(value => x.includes(value))) || (horver.every(value => o.includes(value)))){
+    GBoard.showWin(win);
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
+  }
+  else if((horverTwo.every(value => x.includes(value))) || (horverTwo.every(value => o.includes(value)))){
+    GBoard.showWin(win);
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
+  }
+  else if(arrcheck.length === 9){
+    winner.textContent = `Draw`;
+    showModal.style.display = 'block';
+    // GBoard.reStart(reStartBtn, showModal, winner, AllArray, x, o);
   }
  }
-
-
 
 function gameStart(){
   let allButton = Array.from(document.querySelectorAll('.box-container'));
@@ -91,9 +146,8 @@ const game = gameStart();
 
 
 // Task Tommorrow
-// give validation that the turn can't change or click again.
-// display the winner
 // the button X and O to know who gonna be the first turn
+// Can Restart Game 
 // computer player
 // 
 
