@@ -1,18 +1,34 @@
 function gameBoard(){
-
+  // const valid = validate();
   const markTurn = (turnData, playerTurn, arrbtn) => {
     for(const newArr of arrbtn){
       let dataAtt = newArr.getAttribute('data-num');
       if (dataAtt === turnData){
         let x = document.querySelector(`button[data-num="${turnData}"]`);
-        x.textContent = playerTurn;   
+        validate(x, playerTurn);  
       }
     }
   }
 
-  return { markTurn }
+  const validate = (result, turn) => {
+    if (result.textContent === ""){
+      result.textContent  = turn;
+      result.disabled = true;
+    }
+  }
+
+  const checkBoard = (arrcheck) => {
+    let arrChecking = arrcheck.filter(key => key.textContent != "");
+    if(arrChecking.length >= 3){
+    //   if()
+    // }
+  }
+}
+
+  return { markTurn, checkBoard }
 
 }
+
 
 function gameStart(){
   let allButton = Array.from(document.querySelectorAll('.box-container'));
@@ -43,7 +59,7 @@ function gameStart(){
 
   const playRound = (data) => {
     board.markTurn(data, getActivePlayer().players, allButton)
-
+    board.checkBoard(allButton)
     switchPlayerTurn();
   }
 
