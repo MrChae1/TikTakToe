@@ -17,17 +17,38 @@ function gameBoard(){
     }
   }
 
-  const checkBoard = (arrcheck) => {
-    let arrChecking = arrcheck.filter(key => key.textContent != "");
-    if(arrChecking.length >= 3){
-    //   if()
-    // }
-  }
+  const checkBoard = (arrcheck, decider) => {
+    const ForX = [];
+    const ForO = [];
+    let arrchecking = arrcheck.filter(arr => arr.textContent !== "");
+    for(const seperate  of arrchecking){
+      if(seperate.textContent === 'X'){
+        ForX.push(seperate.getAttribute('data-num'));
+        // console.log(ForX);
+      }
+      else if(seperate.textContent === 'O'){
+        ForO.push(seperate.getAttribute('data-num'));
+        // console.log(ForO);
+      }
+    }
+
+    if(ForX.length >= 3){
+      validateResult(ForX, ForO, decider);
+    }
+  
 }
 
   return { markTurn, checkBoard }
 
 }
+ function validateResult(x, o, win){
+  const horOne = ["1", "2", "3"];
+
+  if(horOne.every(value => x.includes(value)) || horOne.every(value => o.includes(value)) ){
+    console.log(`Player ${win}`);
+  }
+ }
+
 
 
 function gameStart(){
@@ -59,7 +80,7 @@ function gameStart(){
 
   const playRound = (data) => {
     board.markTurn(data, getActivePlayer().players, allButton)
-    board.checkBoard(allButton)
+    board.checkBoard(allButton, getActivePlayer().players)
     switchPlayerTurn();
   }
 
