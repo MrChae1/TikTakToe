@@ -11,6 +11,7 @@ body{
     display: grid;
     grid-template: 1fr 5fr .5fr / 1fr;
     text-align: center;
+    position: relative;
 }
 main{
     grid-row: 2/3;
@@ -31,6 +32,16 @@ main > .Main-Box-Container{
 }
 main > .Main-Box-Container > .box-container{
     border: 5px solid black;
+}
+.container > .hidden-modal{
+    position: absolute;
+    border: 1px solid black;
+    padding: 2rem;
+    top: 40%;
+    left: 30%;
+    background-color: red;
+    border-radius: 10px;
+    display: none;
 }
 
 
