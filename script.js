@@ -3,6 +3,8 @@ function gameBoard(){
   const winner = document.querySelector('#Show-Winner');
   const showModal = document.querySelector('.hidden-modal');
   const reStartBtn = document.querySelector('#Restart');
+  const playerName = document.querySelector('.player-Name');
+  const playerCon = Array.from(playerName.querySelectorAll('*'));
   
   // changing the textContent of the Board with the player Mark
   const BoardMark = (btnData, btnArr, playerMark) =>{
@@ -79,7 +81,7 @@ function gameBoard(){
         else if(newbtnArr.length === 9){
           winner.textContent = `The Game is Draw`;
           showModal.style.display = 'block';
-          // console.log('6');
+          console.log('6');
         }
 
    }  
@@ -97,6 +99,12 @@ function gameBoard(){
       showModal.style.display = 'none';
       winner.textContent = "";
    }
+
+  //  const NamePlayer = () => {
+  //   const allname = playerCon.filter(arr => );
+  //   console.log(allname);
+  //  }
+
 
 return { BoardMark, checkBoard, winner, reStartBtn, reGame }
 
@@ -135,19 +143,18 @@ function gameStart(){
           board.reStartBtn.addEventListener('click', () => {
               board.reGame(allButton);
               if(activePlayer === player[0]){
-                  activePlayer = player[1]
-                  switchPlayerTurn();
+                activePlayer = player[1]
+                switchPlayerTurn();
               }
               else{
-                  switchPlayerTurn();
-                  
+                  switchPlayerTurn();              
               }
+              
           });
       }
       
       
   }
-
 
 }
 
