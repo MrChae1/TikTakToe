@@ -3,8 +3,21 @@ function gameBoard(){
   const winner = document.querySelector('#Show-Winner');
   const showModal = document.querySelector('.hidden-modal');
   const reStartBtn = document.querySelector('#Restart');
-  const playerName = document.querySelector('.player-Name');
-  const playerCon = Array.from(playerName.querySelectorAll('*'));
+  const playerCon = document.querySelector('.player-Name');
+  const playIn = Array.from(document.querySelectorAll('input'));
+  const mainCon = document.querySelector('.Main-Box-Container');
+  const inValue = [];
+
+
+  const getValue = () => {
+      const Startbtn = playerCon.querySelector('.Start-btn');
+      Startbtn.addEventListener('click', () => {
+        playIn.forEach(input => inValue.push(input.value));
+        playIn.forEach(input => input.value = '');
+        mainCon.style.display = 'grid';
+        playerCon.style.display = 'none';
+      });
+    }
   
   // changing the textContent of the Board with the player Mark
   const BoardMark = (btnData, btnArr, playerMark) =>{
@@ -88,7 +101,12 @@ function gameBoard(){
 
    // Show a modal that display the winner and restart button
    const ShowWinner = (winnerMark, btnArr ) =>{
-      winner.textContent = `Winner is player ${winnerMark}`;
+      if(winnerMark === 'X'){
+          winner.textContent = `Winner is player ${inValue[0]}`;
+      }
+      else{
+          winner.textContent = `Winner is player ${inValue[1]}`;
+      }
       showModal.style.display = 'block';
       btnArr.forEach(array => array.disabled = true);
    }
@@ -100,19 +118,17 @@ function gameBoard(){
       winner.textContent = "";
    }
 
-  //  const NamePlayer = () => {
-  //   const allname = playerCon.filter(arr => );
-  //   console.log(allname);
-  //  }
 
 
-return { BoardMark, checkBoard, winner, reStartBtn, reGame }
+
+return { BoardMark, checkBoard, winner, reStartBtn, reGame, getValue }
 
 }
 
 // this is the process of the game
 function gameStart(){
   const board = gameBoard();
+  board.getValue();
 
   let allButton = Array.from(document.querySelectorAll('.box-container'));
   allButton.forEach(button => button.addEventListener('click', event => {
@@ -159,11 +175,3 @@ function gameStart(){
 }
 
 const Game = gameStart();
-
-
-
-
-// get the mark
-// const playerCon = document.querySelector('.player-Name');
-//const players = Array.from(playerCon.querySelectorAll('button'));
-// console.log(players);
