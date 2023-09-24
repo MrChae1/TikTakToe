@@ -14,9 +14,12 @@
             </header>
             <main>
                 <div class="player-Name">
-                    <input class="FirstPlayer player" type="text" placeholder="First Player">
-                    <input class="SecondPlayer player" type="text" placeholder="Second Player">
-                    <button class="Start-btn">Start Game</button>
+                    <div class="pcontain">
+                        <input class="FirstPlayer player" type="text" placeholder="First Player">
+                        <input class="SecondPlayer player" type="text" placeholder="Second Player">
+                        <button class="Start-btn">Start Game</button>
+                    </div>
+                    
                 </div>
                 <div class="Main-Box-Container">
                     <button class="box-container" data-num="1"></button>
@@ -35,8 +38,10 @@
                 <p class="sPlayer"></p>
             </div>
             <div class="hidden-modal">
-                <h2 id="Show-Winner"></h2>
-                <button id="Restart">Restart Game</button>
+                <div class="hinden-section">
+                    <h2 id="Show-Winner"></h2>
+                    <button id="Restart">Restart Game</button>
+                </div>  
             </div>
 
         </div>
