@@ -9,7 +9,7 @@ body{
 }
 .container{
     display: grid;
-    grid-template: 1fr 5fr .5fr / 1fr;
+    grid-template: 1fr 5fr 1fr / 1fr;
     text-align: center;
     position: relative;
 }
@@ -83,6 +83,13 @@ main > .Main-Box-Container > .box-container{
 .container > .hidden-modal > .hinden-section > button{
     padding: 1rem;
 }
+.container > .scoreboard{
+    display: none;
+    align-items: center;
+    justify-content: space-evenly;
+    row-gap: 2rem; 
+}
+
 
 
 
