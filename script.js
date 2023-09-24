@@ -8,6 +8,10 @@ function gameBoard(){
   const playIn = Array.from(pContwo.querySelectorAll('input'));
   const mainCon = document.querySelector('.Main-Box-Container');
   const inValue = [];
+  const playerDisplay = document.querySelector('.scoreboard');
+  const playerScore = Array.from(playerDisplay.querySelectorAll('p'));
+  let scoreOne = 0;
+  let scoreTwo = 0;
 
 
   const getValue = () => {
@@ -17,6 +21,9 @@ function gameBoard(){
         playIn.forEach(input => input.value = '');
         mainCon.style.display = 'grid';
         playerCon.style.display = 'none';
+        playerDisplay.style.display = 'flex'
+        playerScore[0].textContent = `${inValue[0]}: ${scoreOne}`;
+        playerScore[1].textContent = `${inValue[1]}: ${scoreTwo}`;
       });
     }
   
@@ -73,29 +80,29 @@ function gameBoard(){
 
       if((horOne.every(value => x.includes(value)) || horOne.every(value => o.includes(value))) || (verOne.every(value => x.includes(value)) || verOne.every(value => o.includes(value)))){  
           ShowWinner(mark, btnArr);
-          console.log('1');
+          // console.log('1');
       
         }
         else if((horTwo.every(value => x.includes(value)) || horTwo.every(value => o.includes(value))) || (verTwo.every(value => x.includes(value)) || verTwo.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
-          console.log('2');
+          // console.log('2');
         }
         else if((horThree.every(value => x.includes(value))) || (horThree.every(value => o.includes(value))) || (verThree.every(value => x.includes(value))) || (verThree.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
-          console.log('3');
+          // console.log('3');
         }
         else if((horver.every(value => x.includes(value))) || (horver.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
-          console.log('4');
+          // console.log('4');
         }
         else if((horverTwo.every(value => x.includes(value))) || (horverTwo.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
-          console.log('5');
+          // console.log('5');
         }
         else if(newbtnArr.length === 9){
           winner.textContent = `The Game is Draw`;
-          showModal.style.display = 'block';
-          console.log('6');
+          showModal.style.display = 'flex';
+          // console.log('6');
         }
 
    }  
@@ -104,9 +111,11 @@ function gameBoard(){
    const ShowWinner = (winnerMark, btnArr ) =>{
       if(winnerMark === 'X'){
           winner.textContent = `Winner is player ${inValue[0]}`;
+          updateScoreforOne();
       }
       else{
           winner.textContent = `Winner is player ${inValue[1]}`;
+          updateScoreforTwo();
       }
       showModal.style.display = 'flex';
       btnArr.forEach(array => array.disabled = true);
@@ -119,8 +128,16 @@ function gameBoard(){
       winner.textContent = "";
    }
 
+   const updateScoreforOne = () => {
+      scoreOne++;
+      playerScore[0].textContent = `${inValue[0]}: ${scoreOne}`;
 
+   }
+   const updateScoreforTwo = () => {
+      scoreTwo++;
+      playerScore[1].textContent = `${inValue[1]}: ${scoreTwo}`;
 
+   }
 
 return { BoardMark, checkBoard, winner, reStartBtn, reGame, getValue }
 
@@ -164,7 +181,7 @@ function gameStart(){
                 switchPlayerTurn();
               }
               else{
-                  switchPlayerTurn();              
+                switchPlayerTurn();              
               }
               
           });
