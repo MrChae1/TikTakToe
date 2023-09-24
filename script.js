@@ -4,13 +4,14 @@ function gameBoard(){
   const showModal = document.querySelector('.hidden-modal');
   const reStartBtn = document.querySelector('#Restart');
   const playerCon = document.querySelector('.player-Name');
-  const playIn = Array.from(document.querySelectorAll('input'));
+  const pContwo = playerCon.querySelector('.pcontain')
+  const playIn = Array.from(pContwo.querySelectorAll('input'));
   const mainCon = document.querySelector('.Main-Box-Container');
   const inValue = [];
 
 
   const getValue = () => {
-      const Startbtn = playerCon.querySelector('.Start-btn');
+      const Startbtn = pContwo.querySelector('.Start-btn');
       Startbtn.addEventListener('click', () => {
         playIn.forEach(input => inValue.push(input.value));
         playIn.forEach(input => input.value = '');
@@ -107,7 +108,7 @@ function gameBoard(){
       else{
           winner.textContent = `Winner is player ${inValue[1]}`;
       }
-      showModal.style.display = 'block';
+      showModal.style.display = 'flex';
       btnArr.forEach(array => array.disabled = true);
    }
 
