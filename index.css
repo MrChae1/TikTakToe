@@ -24,18 +24,26 @@ main{
 main > .player-Name{
     /* grid-row: 1/2; */
     position: absolute;
-    border: 5px solid black;
+
     padding: 2rem;
-    top: 7%;
-    left: 36%;
+    top: 0;
+    left: 0;
     display: flex; /*This is going to be none after the button get click*/ 
     flex-direction: column;
-    gap: 2rem;
-    border-radius: 10px;
-    width: 400px;
-    height: 250px;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 50vh;
 }
-main > .player-Name > *{
+main > .player-Name > .pcontain{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 5px solid black;
+    padding: 2rem;
+    gap: 2rem;
+}
+main > .player-Name > .pcontain > *{
     padding: .5rem;
     border: 2px solid black;
     border-radius: 10px;
@@ -56,11 +64,24 @@ main > .Main-Box-Container > .box-container{
     position: absolute;
     border: 1px solid black;
     padding: 2rem;
-    top: 40%;
-    left: 30%;
-    background-color: red;
-    border-radius: 10px;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    
     display: none;
+}
+.container > .hidden-modal > .hinden-section{
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    padding: 3rem 2rem;
+    border-radius: 10px;
+}
+.container > .hidden-modal > .hinden-section > button{
+    padding: 1rem;
 }
 
 
