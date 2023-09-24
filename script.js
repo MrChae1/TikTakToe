@@ -12,6 +12,16 @@ function gameBoard(){
   const playerScore = Array.from(playerDisplay.querySelectorAll('p'));
   let scoreOne = 0;
   let scoreTwo = 0;
+  const player = [
+    {
+      name: 'playerOne',
+      players: 'X'
+    },
+    {
+      name: 'playerTwo',
+      players: 'O'
+    }
+];
 
 
   const getValue = () => {
@@ -19,6 +29,8 @@ function gameBoard(){
       Startbtn.addEventListener('click', () => {
         playIn.forEach(input => inValue.push(input.value));
         playIn.forEach(input => input.value = '');
+        player[0].name = inValue[0];
+        player[1].name = inValue[1];
         mainCon.style.display = 'grid';
         playerCon.style.display = 'none';
         playerDisplay.style.display = 'flex'
@@ -85,7 +97,7 @@ function gameBoard(){
         }
         else if((horTwo.every(value => x.includes(value)) || horTwo.every(value => o.includes(value))) || (verTwo.every(value => x.includes(value)) || verTwo.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
-          // console.log('2');
+          console.log('2');
         }
         else if((horThree.every(value => x.includes(value))) || (horThree.every(value => o.includes(value))) || (verThree.every(value => x.includes(value))) || (verThree.every(value => o.includes(value)))){
           ShowWinner(mark, btnArr);
@@ -110,12 +122,33 @@ function gameBoard(){
    // Show a modal that display the winner and restart button
    const ShowWinner = (winnerMark, btnArr ) =>{
       if(winnerMark === 'X'){
-          winner.textContent = `Winner is player ${inValue[0]}`;
-          updateScoreforOne();
+        if(player[0].name === inValue[0]){
+          winner.textContent = `Winner is player ${player[0].name}`;
+          updateScoreforOne(winnerMark);
+          player[0].name = inValue[1];
+          player[1].name = inValue[0];
+          console.log(player);
+        }
+        else{
+          winner.textContent = `Winner is player ${player[0].name}`;
+          updateScoreforTwo(winnerMark);
+          player[0].name = inValue[0];
+          player[1].name = inValue[1];
+          console.log(player);
+        }
       }
       else{
-          winner.textContent = `Winner is player ${inValue[1]}`;
-          updateScoreforTwo();
+          if(player[1].name === inValue[1]){
+            winner.textContent = `Winner is player ${player[1].name}`;
+            updateScoreforTwo(winnerMark);
+            // player[0].name = inValue[0];
+            // player[1].name = inValue[1];
+            console.log(player);
+          }
+          else{
+            winner.textContent = `Winner is player ${player[1].name}`;
+            updateScoreforOne(winnerMark);
+          }  
       }
       showModal.style.display = 'flex';
       btnArr.forEach(array => array.disabled = true);
@@ -128,18 +161,31 @@ function gameBoard(){
       winner.textContent = "";
    }
 
-   const updateScoreforOne = () => {
+   const updateScoreforOne = (winnerMark) => {
       scoreOne++;
-      playerScore[0].textContent = `${inValue[0]}: ${scoreOne}`;
-
+      if(winnerMark === 'X'){
+        playerScore[0].textContent = `${player[0].name}: ${scoreOne}`;
+      }
+      else{
+        playerScore[0].textContent = `${player[1].name}: ${scoreOne}`;
+      }
+      
    }
-   const updateScoreforTwo = () => {
+   const updateScoreforTwo = (winnerMark) => {
       scoreTwo++;
-      playerScore[1].textContent = `${inValue[1]}: ${scoreTwo}`;
+      if(winnerMark === 'X'){
+        playerScore[1].textContent = `${player[0].name}: ${scoreTwo}`;
+        console.log('impostor');
+      }
+      else{
+        playerScore[1].textContent = `${player[1].name}: ${scoreTwo}`;
+        console.log('here');
+      }
+      
 
    }
 
-return { BoardMark, checkBoard, winner, reStartBtn, reGame, getValue }
+return { BoardMark, checkBoard, winner, reStartBtn, reGame, getValue, inValue, player }
 
 }
 
@@ -153,19 +199,13 @@ function gameStart(){
       let clickedButtonData = event.currentTarget.getAttribute('data-num');
       Start(clickedButtonData);
   }));
-    
-  const player = [
-      {
-        players: 'X'
-      },
-      {
-        players: 'O'
-      }
-  ];
-  let activePlayer = player[0];
+  
+
+  let activePlayer = board.player[0];
+  console.log(activePlayer);
 
   const switchPlayerTurn = () => {
-  activePlayer = activePlayer === player[0] ? player[1] : player[0];
+  activePlayer = activePlayer === board.player[0] ? board.player[1] : board.player[0];
 };
   const getActivePlayer = () => activePlayer;
 
@@ -176,8 +216,8 @@ function gameStart(){
       if(board.winner.textContent !== ""){
           board.reStartBtn.addEventListener('click', () => {
               board.reGame(allButton);
-              if(activePlayer === player[0]){
-                activePlayer = player[1]
+              if(activePlayer === board.player[0]){
+                activePlayer = board.player[1]
                 switchPlayerTurn();
               }
               else{
