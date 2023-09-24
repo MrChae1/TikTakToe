@@ -28,7 +28,7 @@ main > .player-Name{
     padding: 2rem;
     top: 7%;
     left: 36%;
-    display: none;
+    display: flex; /*This is going to be none after the button get click*/ 
     flex-direction: column;
     gap: 2rem;
     border-radius: 10px;
@@ -44,7 +44,7 @@ main > .player-Name > *{
 main > .Main-Box-Container{
     /* grid-row: 2/3; */
     border: 5px solid black;
-    display: grid;
+    display: none; /*This is going to be display grid if weclick the button of the player container*/
     grid-template: repeat(3, 1fr) / repeat(3, 1fr) ;
     padding: 1rem;
 }
