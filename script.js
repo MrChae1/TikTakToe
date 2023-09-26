@@ -128,7 +128,7 @@ function gameBoard(){
         }
         else{
           showWin.textContent = `Winner is player ${player[0].name}`;
-          updateScoreforTwo(winnerMark);
+          updateScoreforOne(winnerMark);
           player[0].name = inValue[0];
           player[1].name = inValue[1];
           
@@ -137,8 +137,7 @@ function gameBoard(){
       else{
           if(player[1].name === inValue[1]){
             showWin.textContent = `Winner is player ${player[1].name}`;
-            updateScoreforTwo(winnerMark);
-            
+            updateScoreforOne(winnerMark); 
           }
           else{
             showWin.textContent = `Winner is player ${player[1].name}`;
@@ -157,25 +156,31 @@ function gameBoard(){
    }
 
    const updateScoreforOne = (winnerMark) => {
-      scoreOne++;
       if(winnerMark === 'X'){
-        playerScore[0].textContent = `${player[0].name}: ${scoreOne}`;
-      }
-      else{
-        playerScore[0].textContent = `${player[1].name}: ${scoreOne}`;
-      }
-      
-   }
-   const updateScoreforTwo = (winnerMark) => {
-      scoreTwo++;
-      if(winnerMark === 'X'){
-        playerScore[1].textContent = `${player[0].name}: ${scoreTwo}`;
-      }
-      else{
-        playerScore[1].textContent = `${player[1].name}: ${scoreTwo}`;
-      }
-      
+        if(player[0].name === inValue[0]){
+          scoreOne++;
+          console.log('One')
+          playerScore[0].textContent = `${player[0].name}: ${scoreOne}`;
+        }
+        else{
+          console.log('two')
+          scoreTwo++;
 
+          playerScore[1].textContent = `${player[0].name}: ${scoreTwo}`;
+        }   
+      }
+      else{
+        if(player[1].name === inValue[0]){
+          scoreOne++;
+          console.log('Three');
+          playerScore[0].textContent = `${player[1].name}: ${scoreOne}`;
+        }
+        else{
+          console.log('forth')
+          scoreTwo++;
+          playerScore[1].textContent = `${player[1].name}: ${scoreTwo}`;
+        } 
+      }      
    }
 
 return { BoardMark, checkBoard, reGame, getValue}
